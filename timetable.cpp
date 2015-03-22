@@ -1,7 +1,4 @@
 #include <iostream>
-//#include <cmath>
-//#include <cstdlib>
-//#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -19,7 +16,7 @@ int main (int argc, char* argv[]) {
   ifstream ifile (timetablePath.c_str());
   if (!(ifile.good())) {
     cout << "You have no \"timetable\" file in your homedir.\n"
-         << "Do you want to generate it? [yn] ";
+         << "Generate? [yn] ";
     char answer;
     cin.get(answer);
     if (answer == 'y') {
@@ -43,12 +40,24 @@ int main (int argc, char* argv[]) {
         dayOfWeek = dayOfWeek % 7 + 1;
         break;
       case 't':
-        //already ok
+        //nothing
+        break;
+      case 'd':
+        if (argc > 2) {
+          dayOfWeek = (argv[2][0] - '0') % 7;
+        }
+        else {
+          cerr << "Specify the day number after \"-d\"\n";
+          return 1;
+        }
         break;
       default:
-        cout << "possible args:\n"
-             << "-t  today\n"
-             << "-n  next day\n";
+        cerr << "possible args:\n"
+             << "-t           this day\n"
+             << "-n           next day\n"
+             << "-d <number>  specify the day number\n";
+        return 1;
+        break;
     }
   }
   struct days {
@@ -57,7 +66,7 @@ int main (int argc, char* argv[]) {
   d.mo = "[MONDAY]";
   d.tu = "[TUESDAY]";
   d.we = "[WEDNESDAY]";
-  d.th = "[THIRSDAY]";
+  d.th = "[THURSDAY]";
   d.fr = "[FRIDAY]";
   d.sa = "[SATURDAY]";
   d.su = "[SUNDAY]";
@@ -120,7 +129,7 @@ int main (int argc, char* argv[]) {
           return 0;
         }
         break;
-      case 7:
+      case 0:
         if (line == d.su) {
         cout << line << "\n";
           while ((getline (ifile, line)) && (line != "[end]")) {
