@@ -60,84 +60,23 @@ int main (int argc, char* argv[]) {
         break;
     }
   }
-  struct days {
-    string mo, tu, we, th, fr, sa, su;
-  } d;
-  d.mo = "[MONDAY]";
-  d.tu = "[TUESDAY]";
-  d.we = "[WEDNESDAY]";
-  d.th = "[THURSDAY]";
-  d.fr = "[FRIDAY]";
-  d.sa = "[SATURDAY]";
-  d.su = "[SUNDAY]";
-
+  string day[] = { "[SUNDAY]",
+                   "[MONDAY]",
+                   "[TUESDAY]",
+                   "[WEDNESDAY]",
+                   "[THURSDAY]",
+                   "[FRIDAY]",
+                   "[SATURDAY]"
+ };
+                     
   string line;
   while (!ifile.eof()) {
     getline (ifile, line);
-    switch (dayOfWeek) {
-      case 1:
-        if (line == d.mo) {
+    if (line == day[dayOfWeek]) {
         cout << line << "\n";
-          while ((getline (ifile, line)) && (line != "[end]")) {
+        while ((getline( ifile, line )) && ( line != "[end]")) {
             cout << line << "\n";
-          }
-          return 0;
         }
-        break;
-      case 2:
-        if (line == d.tu) {
-        cout << line << "\n";
-          while ((getline (ifile, line)) && (line != "[end]")) {
-            cout << line << "\n";
-          }
-          return 0;
-        }
-        break;
-      case 3:
-        if (line == d.we) {
-        cout << line << "\n";
-          while ((getline (ifile, line)) && (line != "[end]")) {
-            cout << line << "\n";
-          }
-          return 0;
-        }
-        break;
-      case 4:
-        if (line == d.th) {
-        cout << line << "\n";
-          while ((getline (ifile, line)) && (line != "[end]")) {
-            cout << line << "\n";
-          }
-          return 0;
-        }
-        break;
-      case 5:
-        if (line == d.fr) {
-        cout << line << "\n";
-          while ((getline (ifile, line)) && (line != "[end]")) {
-            cout << line << "\n";
-          }
-          return 0;
-        }
-        break;
-      case 6:
-        if (line == d.sa) {
-        cout << line << "\n";
-          while ((getline (ifile, line)) && (line != "[end]")) {
-            cout << line << "\n";
-          }
-          return 0;
-        }
-        break;
-      case 0:
-        if (line == d.su) {
-        cout << line << "\n";
-          while ((getline (ifile, line)) && (line != "[end]")) {
-            cout << line << "\n";
-          }
-          return 0;
-        }
-        break;
     }
   }
   ifile.close();
